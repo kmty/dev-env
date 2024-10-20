@@ -1,0 +1,25 @@
+## WSL削除
+
+```
+wsl -l -v
+wsl --terminate <distribution_name>
+wsl --unregister <distribution_name>
+```
+```C:\wsl\<distribution_name>```フォルダを削除する
+
+## docker作成環境についてのメモ
+https://qiita.com/studio_haneya/items/0bc57d0c21732fc277fd
+
+### WSL2がnftablesに対応していない為にUbuntu-22以降で発生するエラーに対応
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
+sudo systemctl enable docker
+
+## distribution作成メモ
+
+sudo docker build -t test_docker:latest .
+sudo docker run --name dev -d dev_20241020 /bin/bash
+sudo docker exec -it dev /bin/bash
+
+sudo docker export <container_id> -o dev_20241020.tar.gz
